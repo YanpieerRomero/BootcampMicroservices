@@ -1,0 +1,44 @@
+
+BOOTCAMP - MICROSERVICES
+Spring boot automatiza las configuraciones de spring framework, en su interior tiene spring framework
+Comparte y ha creado nuevas anotaciones
+Servicio SOA: comunicacion agnostica para nosotros
+Servicio REST: Es el standar, un patron de arquitectura
+Rest Ful: implementa la arquitectura REST
+
+dentro de spring boot puedes encontrar versiones de spring framework
+conjunto de herramientas empaquetadas que nos hace la vida más facil a los programadores,
+nos resume toda la configuracion mediante un resumen en componentes
+
+@ComponentScan: para que pueda reconocer y ejecutarlo como parte del proyecto spring boot
+application.properties: la manera de darle configuración por ambientes al proyecto - De manera predeterminada adoptada el ambiente de desarrollo - 
+@RestController: permite implementar servicios Rest
+@RequestMapping: Nos permite especificar el recurso, la url, los tipos de datos que podamos enviar, el content type que podamos usar.
+
+DTO: solo transporta la información, hace que el cliente invoque en tu microservicio, va a enviar cierta información y que tu vas a transformarlo
+body o payload: es la información que se envía
+
+consumes=MediaType.APPLICATION_JSON_VALUE: el cliente que te llama tiene que enviarte como content type un json
+produces=MediaType.APPLICATION_JSON_VALUE: lo que voy a producir tiene que ser un content type json
+
+@valid= valida todo lo que haz declarado
+@validate= hace lo mismo pero su funcion es hacer una validacion segmentada
+
+REsponseEntity: sirve para personalizar las respuestas de los metodos http
+
+Spring Boot: tiene spring framework por debajo, es una herramienta que te automatiza todo para que el desarrollador no haga muchas configuraciones.
+
+Patron singleton: instanciar una sola vez una clase en memoria, las anotaciones @service @controller @repository que usan el patron singleton
+
+Beans = representan objetos en memoria
+
+Para visualizar las metricas:
+	- Jagger
+	- grafana
+
+Compilar jar:
+	java -jar nombreJar ó java -jar nombreJar --spring.profiles.active=PROD
+	
+
+@JsonIgnore; no enviar por error data sensible
+Cada metodo http es un servicio (GET, POST, PUT, DELETE)
