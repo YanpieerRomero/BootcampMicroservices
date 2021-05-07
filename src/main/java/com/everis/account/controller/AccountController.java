@@ -36,7 +36,9 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 @RestController
-@RequestMapping(value = "/accounts", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/accounts",
+		consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 public class AccountController {
 
 	@Autowired
@@ -71,26 +73,31 @@ public class AccountController {
 		return accountService.getAll();
 	}
 
-	@GetMapping(value = "/{id}", consumes = MediaType.ALL_VALUE, headers = "X-API-VERSION=1")
-	public MappingJacksonValue getOne(@PathVariable("id") Integer id) throws NotFoundException {
+	@GetMapping(value = "/{id}", consumes = MediaType.ALL_VALUE, produces = { "application/vnd.company.app-v1+json", "application/vnd.company.app-v1+xml"} /*headers = "X-API-VERSION=1"*/)
+	public MappingJacksonValue getV1One(@PathVariable("id") Integer id) throws NotFoundException {
 
 		AccountRequest account = accountService.get(id);
 
+		//En esta fila se especifica que varios atributos se van a filtrar y mostrar normal
 		SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name");
 
-		FilterProvider filterProvider = new SimpleFilterProvider().addFilter("accountRequest",
-				simpleBeanPropertyFilter);
+		//En esta fila se registra aquello que quieres que se fitre y aparte se coloca el identificador de la clase a filtrar @JsonFilter("accountRequest")
+		FilterProvider filterProvider = new SimpleFilterProvider().addFilter("accountRequest",simpleBeanPropertyFilter);
 
+		// En esta linea de código se aplica filtros a un objeto especifico, en otras palabras se define a que objeto se le aplica el filtro
 		MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(account);
+
+		//Filtro aplicado
 		mappingJacksonValue.setFilters(filterProvider);
 
 		return mappingJacksonValue;
 	}
 
-	@GetMapping(value = "/{id}", consumes = MediaType.ALL_VALUE, params = "version=2")
+	// Versionamiento de servicio
+	@GetMapping(value = "/{id}", consumes = MediaType.ALL_VALUE, produces = { "application/vnd.company.app-v2+json", "application/vnd.company.app-v2+xml" } /*params = "version=2"*/)
 	public AccountRequest2 getV2One(@PathVariable("id") Integer id) throws NotFoundException {
 
-		return new AccountRequest2(2, "asda", "asdasd");
+		return new AccountRequest2(id, "CURRENT", "ACCOUNT");
 	}
 
 	@DeleteMapping(value = "/{id}", consumes = MediaType.ALL_VALUE)

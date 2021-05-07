@@ -52,11 +52,16 @@ public class AccountServiceImpl implements AccountService{
 
 	@Override
 	public AccountRequest get(Integer id) throws NotFoundException {
+		/*List<Account> account = getAll();
+		AccountRequest item = new AccountRequest();
+		BeanUtils.copyProperties(item, account);*/
+		accountList.add(new AccountRequest(1, "ONE ACCOUNT", new Date()));
+		accountList.add(new AccountRequest(2, "TWO ACCOUNT", new Date()));
+		accountList.add(new AccountRequest(3, "THREE ACCOUNT", new Date()));
 		for (AccountRequest item: accountList) {
 			if (item.getId().equals(id)) {
 				return item;
 			}
-			
 		}
 		throw new NotFoundException("id " + id);
 	}

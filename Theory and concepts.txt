@@ -14,6 +14,8 @@ nos resume toda la configuracion mediante un resumen en componentes
 application.properties: la manera de darle configuración por ambientes al proyecto - De manera predeterminada adoptada el ambiente de desarrollo - 
 @RestController: permite implementar servicios Rest
 @RequestMapping: Nos permite especificar el recurso, la url, los tipos de datos que podamos enviar, el content type que podamos usar.
+	-Consumes: el cliente consume un recurso y este es recibido en formato json o xml --> consumes = {"application/xml"} o consumes = {"application/json"}
+	-Produces: el servidor produce un recurso y este es entregado en formato json o xml --> procuces = {"application/xml"} o produces = {"application/json"}
 
 DTO: solo transporta la información, hace que el cliente invoque en tu microservicio, va a enviar cierta información y que tu vas a transformarlo
 body o payload: es la información que se envía
@@ -22,7 +24,7 @@ consumes=MediaType.APPLICATION_JSON_VALUE: el cliente que te llama tiene que env
 produces=MediaType.APPLICATION_JSON_VALUE: lo que voy a producir tiene que ser un content type json
 
 @valid= valida todo lo que haz declarado
-@validate= hace lo mismo pero su funcion es hacer una validacion segmentada
+@validate= hace lo mismo pero su funcion es hacer una validacion segmentada, esta validacion segmentada es en referencia a poder seleccionar clases especificas
 
 REsponseEntity: sirve para personalizar las respuestas de los metodos http
 

@@ -16,11 +16,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@Import(BeanValidatorPluginsConfiguration.class)
+@Import(BeanValidatorPluginsConfiguration.class) //Esta notación sirve para poder documentar todas las notaciones realizadas
 public class SwaggerConfig {
 	
 	  public static final Contact DEFAULT_CONTACT = new Contact("Yanpieer Romero", "www.everis.com", "yromeros@everis.com");
-	  public static final ApiInfo DEFAULT = new ApiInfo("Api Documentation", "Api Documentation", "1.0", "urn:tos",
+	  public static final ApiInfo DEFAULT = new ApiInfo("Everis Api Documentation", "Everis Api Documentation", "1.0", "urn:tos",
 	          DEFAULT_CONTACT, "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList<VendorExtension>());
 	
 	@Bean
