@@ -56,7 +56,6 @@ public class AccountController {
 					.path("/{id}")
 					.buildAndExpand(accountRequest.getId())
 					.toUri();
-		log.info("============================"+account.getId()+"============================");
 		return ResponseEntity.created(uri).build();
 		// new ResponseEntity<AccountRequest>(account, HttpStatus.CREATED);
 	}
@@ -68,8 +67,7 @@ public class AccountController {
 	}
 
 	@GetMapping(consumes = MediaType.ALL_VALUE)
-	public List<Account> getAll(@RequestParam(value = "id", required = false) Integer[] ids,
-			@RequestParam(value = "number", required = false) List<String> numbers) {
+	public List<Account> getAll() {
 		return accountService.getAll();
 	}
 
@@ -107,8 +105,8 @@ public class AccountController {
 	}
 
 	@GetMapping(value = "/{id}/currencies", consumes = MediaType.ALL_VALUE)
-	public List<Currency> getAllCurrencies(@PathVariable("id") Integer id) throws NotFoundException {
-		return accountService.getCurrencies(id);
+	public ResponseEntity<List<Currency>> getAllCurrencies(@PathVariable("id") Integer id) throws NotFoundException {
+		return new ResponseEntity<List<Currency>>(accountService.getCurrencies(id), HttpStatus.OK);
 	}
 
 }

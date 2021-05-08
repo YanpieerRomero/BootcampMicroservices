@@ -34,10 +34,11 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public AccountRequest create(AccountRequest account) {
 		Account accountEntity = new Account();
+		// Este metodo de BeanUtils sirve para copiar todos los atributos del objeto account(Origen) al accountEntity(Destino)
+		// Los dos objetos deben tener los mismos atributos para que todo funcione correctamente
 		BeanUtils.copyProperties(account, accountEntity);
 		accountRepository.save(accountEntity);
 		account.setId(accountEntity.getId());
-		log.info("============================"+account.getId()+"============================");
 		return account;
 	}
 

@@ -31,7 +31,9 @@ public class Account {
 	
 	@Column(name = "startdate")
 	private Date startDate;
-	
+
+	//La relación OneToMany es vista desde el punto del Account: un Account tiene Muchos Currency
+	//El mappedBy tiene que hacer referencia al atributo de la clase a la cual esta representado en este caso es "account"
 	@OneToMany(mappedBy = "account")
 	private List<Currency> currencies;
 

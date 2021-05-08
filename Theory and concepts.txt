@@ -16,7 +16,7 @@ application.properties: la manera de darle configuración por ambientes al proye
 @RequestMapping: Nos permite especificar el recurso, la url, los tipos de datos que podamos enviar, el content type que podamos usar.
 	-Consumes: el cliente consume un recurso y este es recibido en formato json o xml --> consumes = {"application/xml"} o consumes = {"application/json"}
 	-Produces: el servidor produce un recurso y este es entregado en formato json o xml --> procuces = {"application/xml"} o produces = {"application/json"}
-
+MediaType.ALL_VALUE: permite que el tipo de recurso consumido sea de cualquier MediaType o tipo de medio
 DTO: solo transporta la información, hace que el cliente invoque en tu microservicio, va a enviar cierta información y que tu vas a transformarlo
 body o payload: es la información que se envía
 
